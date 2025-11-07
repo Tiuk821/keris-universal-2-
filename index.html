@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TES FINAL ZAPPAR BISA BISMILLAH</title>
-    
-    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <script src="https://libs.zappar.com/zappar-aframe/2.1.6/zappar-aframe.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TES FINAL ZAPPAR BISA BISMILLAH LAGI</title>
+
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://libs.zappar.com/zappar-aframe/2.1.6/zappar-aframe.js"></script>
 </head>
 
 <body style="margin:0; overflow:hidden;">
-    <a-scene zappar-scene>
-        
-        <a-assets>
-            <a-asset-item id="marker-keris" src="kartu-marker.zpt"></a-asset-item>
-        </a-assets>
+  <a-scene zappar-scene>
+    <a-assets>
+      <a-asset-item id="marker-keris" src="kartu-marker.zpt"></a-asset-item>
+    </a-assets>
 
-        <a-entity zappar-camera></a-entity>
+    <a-entity zappar-camera></a-entity>
 
-        <a-entity zappar-image="target: #marker-keris">
-            <a-box color="green" scale="0.1 0.1 0.1" position="0 0.05 0"></a-box>
-        </a-entity>
+    <!-- Box disembunyikan dulu -->
+    <a-entity id="marker-group" zappar-image="target: #marker-keris" visible="false">
+      <a-box color="green" scale="0.1 0.1 0.1" position="0 0.05 0"></a-box>
+    </a-entity>
+  </a-scene>
 
-    </a-scene>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const markerGroup = document.getElementById("marker-group");
+
+      // Tampilkan saat marker terlihat
+      markerGroup.addEventListener("zappar-visible", () => {
+        console.log("🎯 Marker terdeteksi!");
+        markerGroup.setAttribute("visible", true);
+      });
+
+      // Sembunyikan saat marker hilang
+      markerGroup.addEventListener("zappar-notvisible", () => {
+        console.log("👀 Marker hilang!");
+        markerGroup.setAttribute("visible", false);
+      });
+    });
+  </script>
 </body>
 </html>
