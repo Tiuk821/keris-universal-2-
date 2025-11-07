@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal 1.1 (Zappar Image Tracking)</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://libs.zappar.com/zappar-aframe/2.1.6/zappar-aframe.js"></script>
+</head>
+<body>
+    <a-scene zappar-scene>
+        <a-assets>
+            <a-asset-item id="target-file" src="kartu-marker.zpt"/>
+        </a-assets>
+
+        <a-entity zappar-camera></a-entity>
+
+        <a-entity zappar-image="target: #target-file;" id="my-image-tracker">
+            <a-box color="red" scale="0.1 0.1 0.1" position="0 0.05 0"></a-box>
+        </a-entity>
+    </a-scene>
+
+    <script>
+      let myImageTracker = document.getElementById("my-image-tracker");
+
+      myImageTracker.addEventListener("zappar-visible", () => {
+        console.log("Image has become visible");
+      });
+
+      myImageTracker.addEventListener("zappar-notvisible", () => {
+        console.log("Image is no longer visible");
+      });
+    </script>
+</body>
+</html>
